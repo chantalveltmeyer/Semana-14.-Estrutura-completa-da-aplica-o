@@ -1,0 +1,95 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+<h1>Olá, Stranger!</h1>
+
+<p>Prazer em conhecê-lo!</p>
+
+<p>
+    E-mail enviado para o
+    <strong>Administrador do sistema</strong>,
+    notificando o cadastro de um novo usuário.
+</p>
+
+<hr>
+
+
+<form method="POST">
+
+    <label class="label" for="nome">
+        Qual é o seu nome?
+    </label>
+
+    <input
+        class="input-text"
+        type="text"
+        id="nome"
+        name="nome"
+    >
+
+
+    <div class="checkbox">
+
+        <input
+            type="checkbox"
+            id="enviar_email"
+            name="enviar_email"
+            value="1"
+        >
+
+        <label for="enviar_email">
+            Deseja enviar e-mail para
+            flaskaulasweb@zohomail.com?
+        </label>
+
+    </div>
+
+
+    <button
+        type="submit"
+        class="submit">
+        Submit
+    </button>
+
+</form>
+
+
+<h2>Relação de usuários cadastrados</h2>
+
+
+<table>
+
+    <thead>
+
+        <tr>
+            <th>Nome do usuário</th>
+            <th>Função</th>
+        </tr>
+
+    </thead>
+
+
+    <tbody>
+
+        {% for usuario in usuarios %}
+
+        <tr>
+
+            <td>
+                {{ usuario.nome }}
+            </td>
+
+            <td>
+                User
+            </td>
+
+        </tr>
+
+        {% endfor %}
+
+    </tbody>
+
+</table>
+
+{% endblock %}

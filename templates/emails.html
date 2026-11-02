@@ -1,0 +1,66 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+<h1>E-mails enviados</h1>
+
+<p>
+    Relação de e-mails enviados para o administrador do sistema,
+    notificando o cadastro de novos usuários.
+</p>
+
+<table class="emails-table">
+
+    <thead>
+        <tr>
+            <th>De</th>
+            <th>Para</th>
+            <th>Assunto</th>
+            <th>Texto</th>
+            <th>Data/Hora</th>
+        </tr>
+    </thead>
+
+    <tbody>
+
+        {% for email in emails %}
+
+        <tr>
+
+            <td>
+                {{ email.remetente }}
+            </td>
+
+            <td>
+                {{ email.destinatarios }}
+            </td>
+
+            <td>
+                {{ email.assunto }}
+            </td>
+
+            <td>
+                {{ email.texto }}
+            </td>
+
+            <td>
+                {{ email.data_hora.strftime('%d/%m/%Y %H:%M:%S') }}
+            </td>
+
+        </tr>
+
+        {% else %}
+
+        <tr>
+            <td colspan="5">
+                Nenhum e-mail enviado.
+            </td>
+        </tr>
+
+        {% endfor %}
+
+    </tbody>
+
+</table>
+
+{% endblock %}

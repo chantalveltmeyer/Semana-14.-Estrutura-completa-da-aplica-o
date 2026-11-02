@@ -1,0 +1,46 @@
+{% extends "base.html" %}
+{% block content %}
+<h1>Olá, Desconhecido!</h1>
+<p>Prazer em conhecê-lo!</p>
+<p>Cadastre um novo usuário. As notificações serão enviadas ao administrador do sistema, ao e-mail institucional e ao endereço informado.</p>
+<hr>
+<h3>Novo usuário</h3>
+<form method="post" class="user-form">
+  <label for="name">Qual é o seu nome?</label>
+  <input id="name" name="name" required>
+  <label for="username">Nome do usuário</label>
+  <input id="username" name="username" required>
+  <label for="email">Qual é o seu e-mail (recebimento de notificação)?</label>
+  <input id="email" name="email" type="email" required>
+  <label for="password">Senha</label>
+  <input id="password" name="password" type="password" required>
+  <label for="role">Função</label>
+  <select id="role" name="role">
+    <option value="User">User</option>
+    <option value="Admin">Admin</option>
+  </select>
+  <button type="submit" class="btn">Cadastrar</button>
+</form>
+
+<h2>Relação de usuários cadastrados</h2>
+<table>
+  <thead><tr><th>Nome do usuário</th><th>Função</th><th>E-mail</th><th></th><th></th></tr></thead>
+  <tbody>
+  {% for user in users %}
+    <tr>
+      <td>{{ user.username }}</td>
+      <td>{{ user.role }}</td>
+      <td>{{ user.email }}</td>
+      <td><a class="btn small" href="{{ url_for('main.edit_user', user_id=user.id) }}">Editar</a></td>
+      <td>
+        <form method="post" action="{{ url_for('main.delete_user', user_id=user.id) }}" onsubmit="return confirm('Deseja realmente excluir este usuário?');">
+          <button class="btn danger small" type="submit">Excluir</button>
+        </form>
+      </td>
+    </tr>
+  {% else %}
+    <tr><td colspan="5" class="empty">Nenhum usuário cadastrado.</td></tr>
+  {% endfor %}
+  </tbody>
+</table>
+{% endblock %}
